@@ -32,9 +32,6 @@ services:
         XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY:-DOCKER}
         XDEBUG_LOG: /dev/stdout
         XDEBUG_LOG_LEVEL: 0
-    env_file:
-      # Load the environment variables from the Laravel application
-      - .env
     user: "${UID:-1000}:${GID:-1000}"
     volumes:
       # Mount the application code for live updates
@@ -42,7 +39,7 @@ services:
     networks:
       - laravel-development
     depends_on:
-      postgres:
+      mysql:
         condition: service_started  # Wait for postgres to start
 
   workspace:
@@ -61,23 +58,22 @@ services:
         XDEBUG_LOG_LEVEL: 0
     tty: true  # Enables an interactive terminal
     stdin_open: true  # Keeps standard input open for 'docker exec'
-    env_file:
-      - .env
     volumes:
       - ./:/var/www
     networks:
       - laravel-development
 
-  postgres:
-    image: postgres:16
+  mysql:
+    image: mysql
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "${MYSQL_PORT:-3306}:3306"
     environment:
-      - POSTGRES_DB=app
-      - POSTGRES_USER=laravel
-      - POSTGRES_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=perfect_pay
+      - MYSQL_PASSWORD=secret
+      - MYSQL_DATABASE=perfect_pay
     volumes:
-      - postgres-data-development:/var/lib/postgresql/data
+      - mysql-data:/var/lib/mysql
     networks:
       - laravel-development
 
@@ -90,4 +86,4 @@ networks:
   laravel-development:
 
 volumes:
-  postgres-data-development:
+  mysql-data:
