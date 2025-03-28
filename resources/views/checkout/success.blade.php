@@ -14,7 +14,7 @@
             @break
 
         @case ('pix')
-            <image src="data:image/jpeg;base64, {{ $qr_code_image }}" />
+            <img src="data:image/jpeg;base64, {{ $qr_code_image }}" />
             {{ $qr_code_content }}
             @break
     @endswitch
