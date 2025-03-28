@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'asaas' => [
+        'base_url' => env('ASAAS_BASE_URI'),
+        'api_token' => env('ASAAS_API_TOKEN')
+    ],
+
 ];
