@@ -39,10 +39,39 @@ cd test-perfect-pay
 
 ### Rodando o projeto
 
-Execute o comando abaixo no console e toda a configuração necessária para rodar o projeto será executada.
+Execute os comando abaixo no console para subir o ambiente da aplicação
 
+1. Gere o arquivo .env na raiz do projeto
 ```bash
-$ ./setup
+$ cp .env.example .env
+```
+
+2. Gere uma chave de criptografia utilizada pelo Laravel.
+```bash
+$ ./workspace key:generate
+```
+
+3. Suba os conteiners da aplicação
+```bash
+$ docker compose up -d
+```
+
+4. Instale as dependências
+```bash
+$ ./composer install --prefer-dist
+```
+
+5. Execute as migrations
+```bash
+$ ./workspace migrate
 ```
 
 Abra o browser e a aplicação estará disponível em: [http://localhost](http://localhost).
+
+### Executando testes
+
+Para rodar os testes de integração execute:
+
+```bash
+$ ./workspace test
+```
