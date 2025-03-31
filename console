@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cmd=$@
+docker compose exec workspace sh -c "$cmd"

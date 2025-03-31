@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('bank_slip_link')->nullable();
             $table->string('bank_slip_number')->nullable();
             $table->tinyInteger('installments')->nullable();
-            $table->enum('status', ['initialized', 'authorized', 'failed', 'paid'])->index();
+            $table->enum('status', ['initialized', 'authorized', 'failed', 'paid', 'pending'])->index();
             $table->timestamps();
         });
     }
